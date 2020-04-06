@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+
+
+
+	<div class="container">
+		<h2 th:text="#{offer.details.title}"></h2>
+		<div class="panel panel-default">
+			<div class="panel-heading" th:text="#{offer.details.title2}"></div>
+			<div class="panel-body" th:text="${offer.title}">28276</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" th:text="#{offer.details.image}"></div>
+			<img th:src="${offer.picture}" align="center">
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" th:text="#{offer.details.description}"></div>
+			<div class="panel-body" th:text="${offer.description}">
+				Ejercicio 1</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" th:text="#{offer.details.price}"></div>
+			<div class="panel-body" th:text="${offer.price}">100</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" th:text="#{offer.details.date}"></div>
+			<div class="panel-body"
+				th:text="${#dates.format(offer.date, 'dd-MM-yyyy')}">01-01-1998</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" th:text="#{offer.details.send}"></div>
+			<form method="post" action="/chat/add/">
+				Email Receptor:<input type="text" name="emailusuario"
+					th:value="${offer.user.email}"> <input type="text"
+					name="content">
+				<button type="submit" class="enviachat" th:text="#{offer.details.send2}"></button>
+			</form>
+		</div>
+		<div th:if="${offer.sold == false}" class="panel panel-default">
+			<div class="panel-heading"></div>
+			<a th:href="@{'/cart/add/{id}'(id=${offer.id})}" class="col-md-1">
+				<button type="button" class="btn btn-primary" th:text="#{offer.details.buy}"></button>
+			</a>
+		</div>
+	</div>
+
+
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

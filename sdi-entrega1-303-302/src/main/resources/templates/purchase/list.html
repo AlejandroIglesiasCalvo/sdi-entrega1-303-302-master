@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 th:text="#{offers}"></h2>
+		<p th:text="#{offer.purchase.title}"></p>
+		<div class="table-responsive">
+			<table class="table table-hover" th:fragment="tablePurchases"
+				id="tablePurchases">
+				<thead>
+					<tr>
+							<th class="col-md-1" th:text="#{offer.list.id}"></th>
+							<th class="col-md-1" th:text="#{offer.list.title}"></th>
+							<th class="col-md-1" th:text="#{offer.list.description}"></th>
+							<th class="col-md-1" th:text="#{offer.list.price}"></th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="purchase : ${purchaseList}">
+						<td th:text="${purchase.id}">1</td>
+						<td th:text="${purchase.title}">Compra</td>
+						<td th:text="${purchase.description}">Opel corsa</td>
+						<td th:text="${purchase.price}">10</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer th:replace="fragments/pagination" />
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>

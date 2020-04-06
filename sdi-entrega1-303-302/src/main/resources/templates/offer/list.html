@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2 th:text="#{offers}"></h2>
+		<form class="navbar-form" action="/offer/list">
+			<div class="form-group">
+				<input name="searchText" type="text" class="form-control" size="50"
+				th:placeholder="#{offer.searchByName}">
+			</div>
+			<button type="submit" class="busqueda"
+				th:text="#{offer.listall.search}"></button>
+		</form>
+		<p th:text="#{offer.listall.title}"></p>
+		<div class="table-responsive">
+			<table class="table table-hover" th:fragment="tableOffers"
+				id="tableOffers">
+				<thead>
+					<tr>
+						<th class="col-md-1" th:text="#{offer.list.id}"></th>
+						<th class="col-md-1" th:text="#{offer.list.title}"></th>
+						<th class="col-md-1" th:text="#{offer.list.description}"></th>
+						<th class="col-md-1" th:text="#{offer.list.price}"></th>
+						<th class="col-md-1" th:text="#{offer.list.stock}"></th>
+						<th class="col-md-1" th:text="#{offer.list.more}"></th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="offer : ${offerList}">
+						<td th:text="${offer.id}">1</td>
+						<td th:text="${offer.title}">1</td>
+						<td th:text="${offer.description}">Ejercicio 1</td>
+						<td th:text="${offer.price}">10</td>
+						<td th:if="${offer.sold} == false"><a
+							th:href="@{'/cart/add/{id}'(id=${offer.id})}" class="col-md-1" />
+								<button type="button" class="botoncomprar" th:text="#{offer.details.buy}"></button></td>
+							<td th:if="${offer.sold} == true" th:text="#{offer.listall.sold}"></td>
+							<td><a th:href="${'/offer/details/' + offer.id}"
+							class="details" th:text="#{offer.list.more}"></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer th:replace="fragments/pagination" />
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>
